@@ -43,7 +43,7 @@ public class QuoteControllerTest {
     @Test
     public void test_quote_byId() throws Exception {
     	HttpHeaders requestHeaders = new HttpHeaders();
-    	requestHeaders.setAccept(Arrays.asList(MediaType.parseMediaType("application/vnd.sapient.app-v1+json")));
+    	requestHeaders.setAccept(Arrays.asList(MediaType.parseMediaType("application/vnd.example.app-v1+json")));
     	HttpEntity<?> requestEntity = new HttpEntity(requestHeaders);
     	ResponseEntity<QuoteV2> response = restTemplate.exchange(BASE_URL+"/4",HttpMethod.GET,requestEntity, QuoteV2.class);
     	assertThat(response.getStatusCode(),is(HttpStatus.OK));
@@ -53,11 +53,11 @@ public class QuoteControllerTest {
     @Test
     public void should_respond_with_random_quote_with_type() throws Exception {
     	HttpHeaders requestHeaders = new HttpHeaders();
-    	requestHeaders.setAccept(Arrays.asList(MediaType.parseMediaType("application/vnd.sapient.app-v2+json")));
+    	requestHeaders.setAccept(Arrays.asList(MediaType.parseMediaType("application/vnd.example.app-v2+json")));
     	HttpEntity<?> requestEntity = new HttpEntity(requestHeaders);
     	ResponseEntity<QuoteV2> response = restTemplate.exchange(RANDOM_URL,HttpMethod.GET,requestEntity, QuoteV2.class);
     	assertThat(response.getStatusCode(),is(HttpStatus.OK));
     	assertThat(response.getBody().getType(),is("success"));
-    	//assertThat(response.getHeaders().containsValue("application/vnd.sapient.app-v2+json;charset=UTF-8"));
+    	//assertThat(response.getHeaders().containsValue("application/vnd.example.app-v2+json;charset=UTF-8"));
     }    
 }
