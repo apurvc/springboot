@@ -35,17 +35,20 @@ public class QuoteControllerTest {
 	
     @Test
     public void should_respond_with_random_quote() throws Exception {
-    	QuoteV1 quote = restTemplate.getForObject(RANDOM_URL, QuoteV1.class);
-    	assertNotNull(quote);
-    	assertNotNull(quote.getValue().getQuote());
+    	HttpHeaders requestHeaders = new HttpHeaders();
+    	requestHeaders.setContentType(MediaType.parseMediaType("application/vnd.example.app-v1+json"));
+    	HttpEntity<String> requestEntity = new HttpEntity<String>(requestHeaders);
+    	ResponseEntity<QuoteV1> response = restTemplate.exchange(RANDOM_URL,HttpMethod.GET,requestEntity, QuoteV1.class);
+    	assertNotNull(response);
+    	assertNotNull(response.getBody().getValue().getQuote());
     }
       
     @Test
     public void test_quote_byId() throws Exception {
     	HttpHeaders requestHeaders = new HttpHeaders();
-    	requestHeaders.setAccept(Arrays.asList(MediaType.parseMediaType("application/vnd.example.app-v1+json")));
-    	HttpEntity<?> requestEntity = new HttpEntity(requestHeaders);
-    	ResponseEntity<QuoteV2> response = restTemplate.exchange(BASE_URL+"/4",HttpMethod.GET,requestEntity, QuoteV2.class);
+    	requestHeaders.setContentType(MediaType.parseMediaType("application/vnd.example.app-v1+json"));
+    	HttpEntity<String> requestEntity = new HttpEntity<String>(requestHeaders);
+    	ResponseEntity<QuoteV1> response = restTemplate.exchange(BASE_URL+"/4",HttpMethod.GET,requestEntity, QuoteV1.class);
     	assertThat(response.getStatusCode(),is(HttpStatus.OK));
     	assertThat(response.getBody().getValue().getId().toString(),is("4"));
     }
@@ -53,8 +56,8 @@ public class QuoteControllerTest {
     @Test
     public void should_respond_with_random_quote_with_type() throws Exception {
     	HttpHeaders requestHeaders = new HttpHeaders();
-    	requestHeaders.setAccept(Arrays.asList(MediaType.parseMediaType("application/vnd.example.app-v2+json")));
-    	HttpEntity<?> requestEntity = new HttpEntity(requestHeaders);
+    	requestHeaders.setContentType(MediaType.parseMediaType("application/vnd.example.app-v2+json"));
+    	HttpEntity<String> requestEntity = new HttpEntity<String>(requestHeaders);
     	ResponseEntity<QuoteV2> response = restTemplate.exchange(RANDOM_URL,HttpMethod.GET,requestEntity, QuoteV2.class);
     	assertThat(response.getStatusCode(),is(HttpStatus.OK));
     	assertThat(response.getBody().getType(),is("success"));
