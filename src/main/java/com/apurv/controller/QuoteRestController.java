@@ -12,7 +12,7 @@ import com.apurv.service.QuoteService;
 
 @RestController
 @RequestMapping("/api/quote")
-public class QuoteController {
+public class QuoteRestController {
 
 	@Autowired
 	private QuoteService quoteService;
