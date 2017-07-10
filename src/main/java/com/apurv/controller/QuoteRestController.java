@@ -10,6 +10,8 @@ import com.apurv.model.QuoteV1;
 import com.apurv.model.QuoteV2;
 import com.apurv.service.QuoteService;
 
+import exception.QuoteNotFoundException;
+
 @RestController
 @RequestMapping("/api/quote")
 public class QuoteRestController {
@@ -22,14 +24,27 @@ public class QuoteRestController {
 		return quoteService.getSimpleQuote();
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/{quoteId}", consumes = "application/vnd.example.app-v1+json", produces = "application/vnd.example.app-v1+json")
+	@RequestMapping(method = RequestMethod.GET, value = "/fixed/{quoteId}", consumes = "application/vnd.example.app-v1+json", produces = "application/vnd.example.app-v1+json")
 	public QuoteV1 getQuoteById(@PathVariable("quoteId") String quoteId) {
-		return quoteService.getQuoteV1ById(quoteId);
+		QuoteV1 quote = quoteService.getQuoteV1ById(quoteId);
+		if(quote.getValue().getId()== null){
+			throw new QuoteNotFoundException();
+		}
+		return quote;
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/random", consumes = "application/vnd.example.app-v2+json", produces = "application/vnd.example.app-v2+json")
 	public QuoteV2 getDetailQuote() {
 		return quoteService.getDetailQuote();
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/fixed/{quoteId}", consumes = "application/vnd.example.app-v2+json", produces = "application/vnd.example.app-v2+json")
+	public QuoteV2 getDetailQuoteById(@PathVariable("quoteId") String quoteId) {
+		QuoteV2 quote = quoteService.getQuoteV2ById(quoteId);
+		if(!quote.getType().equals("success")){
+			throw new QuoteNotFoundException();
+		}
+		return quote;
 	}
 
 }

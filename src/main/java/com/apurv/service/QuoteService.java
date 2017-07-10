@@ -27,4 +27,10 @@ public class QuoteService {
 		return restTemplate.getForObject(BASE_SERVICE_URL+id, QuoteV1.class);
 	}
 	
+	public QuoteV2 getQuoteV2ById(String id){
+		RestTemplate restTemplate = new RestTemplate();
+		return restTemplate.getForObject(RANDOM_SERVICE_URL+id, QuoteV2.class);
+	}
+	
+	
 }
