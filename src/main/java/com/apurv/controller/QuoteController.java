@@ -32,4 +32,8 @@ public class QuoteController {
 		return quoteService.getDetailQuote();
 	}
 
+	@RequestMapping(method = RequestMethod.GET, value = "/random", produces = "application/json")
+	public QuoteV2 getRandomQuote() {
+		return quoteService.getDetailQuote();
+	}
 }
