@@ -5,10 +5,9 @@ Project can be run using command mvn spring-boot:run
 
 The API's  can be tested using any rest client by hitting http://localhost:8989/api/quote/random or with custom content-type headers 
 
-curl -v -X GET -H "Content-Type: application/vnd.example.app-v1+json" http://localhost:8989/api/quote/random
-curl -v -X GET -H "Content-Type: application/vnd.example.app-v2+json" http://localhost:8989/api/quote/random
-
-curl -v -X GET -H "Content-Type: application/vnd.example.app-v1+json" http://localhost:8989/api/quote/4
+	curl -v -X GET -H "Content-Type: application/vnd.example.app-v1+json" http://localhost:8989/api/quote/random
+	curl -v -X GET -H "Content-Type: application/vnd.example.app-v2+json" http://localhost:8989/api/quote/random
+	curl -v -X GET -H "Content-Type: application/vnd.example.app-v1+json" http://localhost:8989/api/quote/4
 
 This app is just an attempt to check the different response based on custom media type. 
 
