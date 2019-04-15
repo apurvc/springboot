@@ -1,6 +1,6 @@
 def label = "maven-${UUID.randomUUID().toString()}"
 
-podTemplate(label: cd-jenkins-slave, yaml: """
+podTemplate(label: 'cd-jenkins-slave' , yaml: """
 apiVersion: v1
 kind: Pod
 metadata:
