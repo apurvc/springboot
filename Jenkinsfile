@@ -7,7 +7,7 @@ metadata:
   labels:
     some-label: cd-jenkins-slave
 spec:
-  serviceAccountName: jenkins-cd
+  #serviceAccountName: jenkins-cd
   containers:
   - name: maven
     image: maven:3.3.9-jdk-8-alpine
