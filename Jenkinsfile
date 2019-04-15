@@ -50,10 +50,6 @@ spec:
     }
     stage('Deploy Dev') {
       // Developer Branches
-      when { 
-        not { branch 'master' } 
-        not { branch 'canary' }
-      } 
       steps {
         container('kubectl') {
           // Create namespace if it doesn't exist
