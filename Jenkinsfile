@@ -56,8 +56,8 @@ spec:
           // Create namespace if it doesn't exist
           sh("kubectl get ns ${env.BRANCH_NAME} || kubectl create ns ${env.BRANCH_NAME}")
           sh("kubectl --namespace=${env.BRANCH_NAME} apply -f deployment.yaml")
-          echo 'To access your environment run `kubectl proxy`'
-          echo "Then access your service via http://localhost:8001/api/v1/proxy/namespaces/${env.BRANCH_NAME}/services/${feSvcName}:80/"
+          echo 'To access the deployment check the  externale ip `kubectl get svc -n ${env.BRANCH_NAME}`'
+          echo 'and then use http://EXTERNAL_IP:8989/api/quote/random' 
         }
            
     }    
