@@ -15,6 +15,7 @@ spec:
         ports:
         - containerPort: 8989
 ---
+apiVersion: v1
 kind: Service
 metadata:
   name: spring-rest-svc
