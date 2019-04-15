@@ -16,6 +16,11 @@ spec:
     env:
     - name: CONTAINER_ENV_VAR
       value: container-env-var-value
+  - name: kubectl
+    image: gcr.io/cloud-builders/kubectl
+    command:
+    - cat
+    tty: true      
   - name: docker
     image: docker:1.11
     command: ['cat']
@@ -26,12 +31,7 @@ spec:
   volumes:
   - name: dockersock
     hostPath:
-      path: /var/run/docker.sock
-  - name: kubectl
-    image: gcr.io/cloud-builders/kubectl
-    command:
-    - cat
-    tty: true      
+      path: /var/run/docker.sock      
 """
   ) {
 
@@ -50,7 +50,7 @@ spec:
     }
     stage('Deploy Dev') {
       // Developer Branches
-      steps {
+      
         container('kubectl') {
           // Create namespace if it doesn't exist
           sh("kubectl get ns ${env.BRANCH_NAME} || kubectl create ns ${env.BRANCH_NAME}")
@@ -58,7 +58,7 @@ spec:
           echo 'To access your environment run `kubectl proxy`'
           echo "Then access your service via http://localhost:8001/api/v1/proxy/namespaces/${env.BRANCH_NAME}/services/${feSvcName}:80/"
         }
-      }     
+           
     }    
   }
 }
