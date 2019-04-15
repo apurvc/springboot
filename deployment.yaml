@@ -22,7 +22,7 @@ metadata:
   labels:
     app: spring-rest
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
   - port: 8989
 
