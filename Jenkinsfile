@@ -16,6 +16,17 @@ spec:
     env:
     - name: CONTAINER_ENV_VAR
       value: container-env-var-value
+  - name: docker
+    image: docker:1.11
+    command: ['cat']
+    tty: true
+    volumeMounts:
+    - name: dockersock
+      mountPath: /var/run/docker.sock
+  volumes:
+  - name: dockersock
+    hostPath:
+      path: /var/run/docker.sock      
 """
   ) {
 
@@ -26,5 +37,11 @@ spec:
           sh 'mvn clean package -DskipTests'
       }
     }
+    stage('docker build') {
+      git 'https://github.com/apurvc/springboot.git'
+      container('docker') {
+          sh "docker build -t spring-rest:v1 ."
+      }
+    }    
   }
 }
