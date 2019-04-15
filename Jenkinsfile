@@ -5,7 +5,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   labels:
-    some-label: some-label-value
+    some-label: cd-jenkins-slave
 spec:
   containers:
   - name: maven
