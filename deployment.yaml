@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: spring-rest
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: spring-rest
+    spec:
+      containers:
+      - name: spring-rest
+        image: spring-rest:v1
+        ports:
+        - containerPort: 8989
+---
+kind: Service
+metadata:
+  name: spring-rest-svc
+  labels:
+    app: spring-rest
+spec:
+  type: NodePort
+  ports:
+  - port: 8989
+
+  selector:
+    app: spring-rest 
