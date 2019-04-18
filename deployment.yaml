@@ -21,10 +21,10 @@ metadata:
   name: spring-rest-svc
   labels:
     app: spring-rest
+    service: spring-rest-svc
 spec:
-  type: LoadBalancer
   ports:
   - port: 8989
-
+    name: http
   selector:
-    app: spring-rest 
+    app: spring-rest
