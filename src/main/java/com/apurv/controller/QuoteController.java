@@ -36,4 +36,9 @@ public class QuoteController {
 	public QuoteV2 getRandomQuote() {
 		return quoteService.getDetailQuote();
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/greet", produces = "application/json")
+	public String getGreeting() {
+		return "Hello apurv";
+	}	
 }
